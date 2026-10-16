@@ -9,16 +9,16 @@
       dialog-class="modal-dialog-centered"
       @hidden="onModalHidden"
     >
-      <div class="modal-novo-card">
+      <div class="modal-novo-card" :class="{ 'theme-dark': isDarkMode, 'theme-light': !isDarkMode }">
         
         <!-- CABEÇALHO LIMPO & MODERNO -->
-        <div class="p-4 pb-3 border-bottom d-flex align-items-center justify-content-between modal-header-bar">
+        <div class="p-3 px-4 border-bottom d-flex align-items-center justify-content-between modal-header-bar flex-shrink-0">
           <div>
             <div class="d-flex align-items-center gap-2">
               <span class="avatar-title bg-warning-subtle text-warning rounded-circle fs-16 fw-bold header-icon-box">
                 <i class="ri-calendar-event-fill"></i>
               </span>
-              <h4 class="fs-18 fw-bold text-body mb-0 tracking-tight">Novo Agendamento</h4>
+              <h4 class="fs-17 fw-bold modal-title-text mb-0 tracking-tight">Novo Agendamento</h4>
             </div>
             <p class="fs-12 text-muted mb-0 mt-1 ms-4 ps-2">Selecione o cliente, o profissional, os serviços e o horário desejado.</p>
           </div>
@@ -27,7 +27,7 @@
           </button>
         </div>
 
-        <BRow class="g-0">
+        <BRow class="g-0 modal-body-row">
           <!-- COLUNA ESQUERDA: FORMULÁRIO DE SELEÇÃO -->
           <BCol lg="7" class="p-4 border-end modal-form-col">
             
@@ -39,11 +39,11 @@
                 </label>
                 <div class="btn-group btn-group-sm">
                   <button type="button" @click="tipoSelecaoCliente = 'cadastrado'" class="btn btn-xs rounded-start-pill"
-                    :class="tipoSelecaoCliente === 'cadastrado' ? 'btn-dark' : 'btn-light'">
+                    :class="tipoSelecaoCliente === 'cadastrado' ? 'btn-tipo-cliente-active' : 'btn-tipo-cliente-inactive'">
                     Cliente da Casa
                   </button>
                   <button type="button" @click="tipoSelecaoCliente = 'novo'" class="btn btn-xs rounded-end-pill"
-                    :class="tipoSelecaoCliente === 'novo' ? 'btn-dark' : 'btn-light'">
+                    :class="tipoSelecaoCliente === 'novo' ? 'btn-tipo-cliente-active' : 'btn-tipo-cliente-inactive'">
                     Novo / Rápido
                   </button>
                 </div>
@@ -226,7 +226,7 @@
                 <button v-for="cat in categoriasServicos" :key="cat" type="button"
                   @click="categoriaAtiva = cat"
                   class="btn btn-xs rounded-pill"
-                  :class="categoriaAtiva === cat ? 'btn-dark' : 'btn-light'">
+                  :class="categoriaAtiva === cat ? 'btn-cat-active' : 'btn-cat-inactive'">
                   {{ cat }}
                 </button>
               </div>
@@ -316,19 +316,19 @@
                   <span class="fs-12 text-uppercase fw-bold text-muted tracking-wider">Horários da Grade</span>
                   <div class="btn-group btn-group-sm">
                     <button type="button" @click="turnoFiltro = 'todos'" class="btn btn-xs"
-                      :class="turnoFiltro === 'todos' ? 'btn-dark' : 'btn-light'">
+                      :class="turnoFiltro === 'todos' ? 'btn-turno-active' : 'btn-turno-inactive'">
                       Todos
                     </button>
                     <button type="button" @click="turnoFiltro = 'manha'" class="btn btn-xs"
-                      :class="turnoFiltro === 'manha' ? 'btn-dark' : 'btn-light'">
+                      :class="turnoFiltro === 'manha' ? 'btn-turno-active' : 'btn-turno-inactive'">
                       🌅 Manhã
                     </button>
                     <button type="button" @click="turnoFiltro = 'tarde'" class="btn btn-xs"
-                      :class="turnoFiltro === 'tarde' ? 'btn-dark' : 'btn-light'">
+                      :class="turnoFiltro === 'tarde' ? 'btn-turno-active' : 'btn-turno-inactive'">
                       ☀️ Tarde
                     </button>
                     <button type="button" @click="turnoFiltro = 'noite'" class="btn btn-xs"
-                      :class="turnoFiltro === 'noite' ? 'btn-dark' : 'btn-light'">
+                      :class="turnoFiltro === 'noite' ? 'btn-turno-active' : 'btn-turno-inactive'">
                       🌙 Noite
                     </button>
                   </div>
@@ -347,9 +347,8 @@
                       :disabled="isHorarioOcupado(hora)"
                       class="btn btn-sm btn-chip-minimal position-relative"
                       :class="{
-                        'btn-dark text-warning fw-bold active': novoAgendamento.horario === hora,
-                        'btn-light text-body': novoAgendamento.horario !== hora && !isHorarioOcupado(hora),
-                        'btn-light text-muted opacity-50': isHorarioOcupado(hora)
+                        'active': novoAgendamento.horario === hora,
+                        'ocupado': isHorarioOcupado(hora)
                       }">
                       {{ hora }}
                       <span v-if="isHorarioOcupado(hora)" class="slot-ocupado-dot" title="Horário Ocupado"></span>
@@ -370,9 +369,8 @@
                       :disabled="isHorarioOcupado(hora)"
                       class="btn btn-sm btn-chip-minimal position-relative"
                       :class="{
-                        'btn-dark text-warning fw-bold active': novoAgendamento.horario === hora,
-                        'btn-light text-body': novoAgendamento.horario !== hora && !isHorarioOcupado(hora),
-                        'btn-light text-muted opacity-50': isHorarioOcupado(hora)
+                        'active': novoAgendamento.horario === hora,
+                        'ocupado': isHorarioOcupado(hora)
                       }">
                       {{ hora }}
                       <span v-if="isHorarioOcupado(hora)" class="slot-ocupado-dot" title="Horário Ocupado"></span>
@@ -393,9 +391,8 @@
                       :disabled="isHorarioOcupado(hora)"
                       class="btn btn-sm btn-chip-minimal position-relative"
                       :class="{
-                        'btn-dark text-warning fw-bold active': novoAgendamento.horario === hora,
-                        'btn-light text-body': novoAgendamento.horario !== hora && !isHorarioOcupado(hora),
-                        'btn-light text-muted opacity-50': isHorarioOcupado(hora)
+                        'active': novoAgendamento.horario === hora,
+                        'ocupado': isHorarioOcupado(hora)
                       }">
                       {{ hora }}
                       <span v-if="isHorarioOcupado(hora)" class="slot-ocupado-dot" title="Horário Ocupado"></span>
@@ -416,8 +413,8 @@
           </BCol>
 
           <!-- COLUNA DIREITA: RESUMO MODERNO & CONFIRMAÇÃO -->
-          <BCol lg="5" class="p-4 modal-summary-col d-flex flex-column justify-content-between">
-            <div>
+          <BCol lg="5" class="p-4 modal-summary-col">
+            <div class="modal-summary-content">
               <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
                 <div>
                   <h6 class="fs-13 fw-bold text-body mb-0 text-uppercase tracking-wider">Resumo do Horário</h6>
@@ -450,7 +447,7 @@
                 <span class="fs-10 text-muted text-uppercase fw-bold d-block mb-1">Data & Previsão</span>
                 <div class="d-flex justify-content-between align-items-center">
                   <strong class="text-body fs-12">{{ formatarData(novoAgendamento.data) }} às {{ novoAgendamento.horario }}</strong>
-                  <span class="badge bg-light text-body border fs-11">
+                  <span class="badge bg-light text-body border fs-11 horario-termino-badge">
                     Até {{ calcularHorarioTermino(novoAgendamento.horario, duracaoNovoCalculada) }}
                   </span>
                 </div>
@@ -483,14 +480,14 @@
               </div>
             </div>
 
-            <!-- Bloco de Confirmação e Preço Final -->
-            <div class="pt-3 border-top">
-              <div class="d-flex justify-content-between align-items-baseline mb-3">
-                <span class="fs-12 text-muted fw-bold text-uppercase">Total a Pagar</span>
-                <h3 class="text-body fw-bold mb-0">R$ {{ valorNovoCalculado.toFixed(2) }}</h3>
+            <!-- Bloco de Confirmação e Preço Final (Sempre Visível no Rodapé) -->
+            <div class="pt-3 border-top modal-summary-footer">
+              <div class="d-flex justify-content-between align-items-baseline mb-2">
+                <span class="fs-11 text-muted fw-bold text-uppercase">Total a Pagar</span>
+                <h3 class="total-preco-text fw-bold mb-0">R$ {{ valorNovoCalculado.toFixed(2) }}</h3>
               </div>
 
-              <div class="form-check mb-3">
+              <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="checkNotificarWhatsModal" v-model="notificarWhatsAppAoSalvar">
                 <label class="form-check-label fs-11 text-muted cursor-pointer" for="checkNotificarWhatsModal">
                   Abrir WhatsApp para enviar confirmação automática
@@ -498,7 +495,7 @@
               </div>
 
               <div class="d-grid gap-2">
-                <button type="button" @click="salvarNovoAgendamentoProfissional" class="btn btn-dark text-warning fw-bold py-2 shadow-sm fs-13">
+                <button type="button" @click="salvarNovoAgendamentoProfissional" class="btn btn-confirmar-modal fw-bold py-2 shadow-sm fs-13">
                   <i class="ri-check-line align-middle me-1"></i> Confirmar Agendamento
                 </button>
                 <button type="button" @click="localVisible = false" class="btn btn-link text-muted text-decoration-none btn-sm py-1">
@@ -526,6 +523,7 @@
 import Swal from "sweetalert2";
 import MiniCalendarioModal from "@/components/barbearia/mini-calendario-modal.vue";
 import { BarbeariaStorage } from "@/helpers/barbearia-storage";
+import { layoutComputed } from "@/state/helpers";
 
 export default {
   name: "ModalNovoAgendamento",
@@ -553,6 +551,10 @@ export default {
       servicos: [],
       clientes: [],
       agendamentos: [],
+
+      // Controle de Tema
+      currentTheme: (typeof document !== 'undefined' && document.documentElement.getAttribute('data-bs-theme')) || 'light',
+      themeObserver: null,
 
       modalCalendarioAberto: false,
       tipoSelecaoCliente: 'cadastrado',
@@ -658,6 +660,10 @@ export default {
     },
     valorNovoCalculado() {
       return this.novoAgendamentoServicosObjs.reduce((acc, curr) => acc + curr.preco, 0);
+    },
+    ...layoutComputed,
+    isDarkMode() {
+      return this.currentTheme === 'dark' || this.mode === 'dark';
     }
   },
   watch: {
@@ -665,10 +671,35 @@ export default {
       if (newVal) {
         this.inicializarDados();
       }
+    },
+    mode(newMode) {
+      if (newMode && this.currentTheme !== newMode) {
+        this.currentTheme = newMode;
+      }
     }
   },
   mounted() {
     this.carregarDados();
+    const activeTheme = (typeof document !== 'undefined' && document.documentElement.getAttribute('data-bs-theme')) || this.mode || 'light';
+    this.currentTheme = activeTheme;
+
+    if (typeof MutationObserver !== 'undefined') {
+      this.themeObserver = new MutationObserver(() => {
+        const t = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        if (this.currentTheme !== t) {
+          this.currentTheme = t;
+        }
+      });
+      this.themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-bs-theme']
+      });
+    }
+  },
+  beforeUnmount() {
+    if (this.themeObserver) {
+      this.themeObserver.disconnect();
+    }
   },
   methods: {
     carregarDados() {
@@ -891,17 +922,74 @@ export default {
   transition: all 0.2s ease-in-out;
 }
 
+/* ========================================================= */
+/* LAYOUT E ESTRUTURA DO MODAL (SEM CORTES OU TRANSBORDAMENTO)*/
+/* ========================================================= */
 .modal-novo-card {
-  background-color: var(--vz-card-bg, #ffffff);
+  display: flex;
+  flex-direction: column;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: 88vh;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .modal-header-bar {
-  background-color: var(--vz-card-bg, #ffffff);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--vz-border-color, #e2e8f0);
+}
+
+.modal-body-row {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.modal-form-col {
+  height: 100%;
+  max-height: calc(88vh - 75px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.modal-summary-col {
+  height: 100%;
+  max-height: calc(88vh - 75px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal-summary-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+}
+
+.modal-summary-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Scrollbar sutil para navegação confortável */
+.modal-form-col::-webkit-scrollbar,
+.modal-summary-content::-webkit-scrollbar,
+.servicos-scroll-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+.modal-form-col::-webkit-scrollbar-track,
+.modal-summary-content::-webkit-scrollbar-track,
+.servicos-scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-form-col::-webkit-scrollbar-thumb,
+.modal-summary-content::-webkit-scrollbar-thumb,
+.servicos-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
 }
 
 .header-icon-box {
@@ -912,29 +1000,11 @@ export default {
   justify-content: center;
 }
 
-.modal-form-col {
-  background-color: var(--vz-card-bg, #ffffff);
-}
-
-.modal-summary-col {
-  background-color: var(--vz-light, #f8fafc);
-}
-[data-bs-theme="dark"] .modal-summary-col {
-  background-color: rgba(255, 255, 255, 0.03);
-}
-
-.summary-inner-card {
-  background-color: var(--vz-card-bg, #ffffff);
-  border-color: var(--vz-border-color, #e2e8f0) !important;
-}
-
 .btn-modal-close {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 1px solid var(--vz-border-color, #e2e8f0);
-  background: var(--vz-card-bg, #ffffff);
-  color: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -943,28 +1013,16 @@ export default {
   font-size: 16px;
   padding: 0;
 }
-.btn-modal-close:hover {
-  background-color: var(--vz-light, #f1f5f9);
-  color: #0f172a;
-}
 
 .card-barbeiro-minimal {
   position: relative;
   border: 1.5px solid var(--vz-border-color, #e2e8f0);
   border-radius: 10px;
-  background-color: var(--vz-card-bg, #ffffff);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 .card-barbeiro-minimal:hover {
-  border-color: #cbd5e1;
-  background-color: rgba(var(--vz-primary-rgb, 64, 81, 137), 0.03);
   transform: translateY(-2px);
-}
-.card-barbeiro-minimal.selecionado {
-  border-color: #f59e0b !important;
-  background-color: rgba(245, 158, 11, 0.08) !important;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12);
 }
 
 .badge-check-mini {
@@ -981,28 +1039,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--vz-card-bg, #ffffff);
+  border: 2px solid #ffffff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .card-servico-minimal {
   border: 1.5px solid var(--vz-border-color, #e2e8f0);
   border-radius: 10px;
-  background-color: var(--vz-card-bg, #ffffff);
   transition: all 0.15s ease;
   user-select: none;
-}
-.card-servico-minimal:hover {
-  border-color: #cbd5e1;
-  background-color: rgba(var(--vz-primary-rgb, 64, 81, 137), 0.03);
-}
-.card-servico-minimal.selecionado {
-  border-color: #f59e0b !important;
-  background-color: rgba(245, 158, 11, 0.08) !important;
-}
-.card-servico-minimal.selecionado .servico-icon-mini {
-  background-color: #fde68a;
-  color: #92400e;
 }
 
 .servico-icon-mini {
@@ -1010,8 +1055,6 @@ export default {
   height: 30px;
   min-width: 30px;
   border-radius: 8px;
-  background: var(--vz-light, #f1f5f9);
-  color: #475569;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1024,22 +1067,7 @@ export default {
   padding: 5px 11px;
   font-size: 12px;
   font-weight: 500;
-  border: 1px solid var(--vz-border-color, #e2e8f0);
-  background-color: var(--vz-card-bg, #f8fafc);
-  color: inherit;
   transition: all 0.15s ease;
-}
-.btn-chip-minimal:hover {
-  border-color: #f59e0b;
-  background-color: rgba(245, 158, 11, 0.08);
-  color: #b45309;
-}
-.btn-chip-minimal.active {
-  background-color: #0f172a !important;
-  color: #fbbf24 !important;
-  border-color: #0f172a !important;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
 }
 
 .btn-xs {
@@ -1075,13 +1103,8 @@ export default {
   background: transparent;
 }
 .combobox-trigger {
-  border-color: var(--vz-border-color, #e2e8f0);
-  background-color: var(--vz-card-bg, #ffffff);
   transition: all 0.15s ease;
   user-select: none;
-}
-.combobox-trigger:hover {
-  border-color: #f59e0b;
 }
 .dropdown-cliente-panel {
   position: absolute;
@@ -1089,42 +1112,9 @@ export default {
   left: 0;
   right: 0;
   z-index: 1050;
-  background-color: var(--vz-card-bg, #ffffff);
-  border-color: var(--vz-border-color, #e2e8f0);
-  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 .item-cliente-dropdown {
   transition: all 0.15s ease;
-}
-.item-cliente-dropdown:hover {
-  background-color: var(--vz-light, #f1f5f9);
-}
-.item-cliente-dropdown.selecionado-item {
-  background-color: rgba(245, 158, 11, 0.1) !important;
-  border: 1px solid #fde68a;
-}
-
-/* Ocultar Barras de Rolagem */
-.modal-novo-card,
-.servicos-scroll-wrapper,
-.mini-calendario-strip,
-.lista-clientes-scroll,
-.barbeiros-scroll-strip,
-.hide-scrollbar {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-.modal-novo-card::-webkit-scrollbar,
-.servicos-scroll-wrapper::-webkit-scrollbar,
-.mini-calendario-strip::-webkit-scrollbar,
-.lista-clientes-scroll::-webkit-scrollbar,
-.barbeiros-scroll-strip::-webkit-scrollbar,
-.hide-scrollbar::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  background: transparent !important;
 }
 
 /* Rolagem Lateral de Barbeiros */
@@ -1149,7 +1139,6 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  border: 1px solid var(--vz-border-color, #e2e8f0);
 }
 
 .servicos-scroll-wrapper {
@@ -1157,44 +1146,19 @@ export default {
   overflow-y: auto;
 }
 
-.mini-calendario-card {
-  border-color: var(--vz-border-color, #e2e8f0) !important;
-  background-color: var(--vz-card-bg, #ffffff);
-}
 .mini-calendario-strip {
   overflow-x: auto;
 }
 .dia-card-mini {
   min-width: 52px;
-  border-color: var(--vz-border-color, #e2e8f0);
-  background: var(--vz-card-bg, #ffffff);
   user-select: none;
   padding: 3px 6px !important;
 }
 .dia-card-mini:hover {
   border-color: #f59e0b;
-  background: rgba(245, 158, 11, 0.08);
   transform: translateY(-1px);
 }
-.dia-card-mini.selecionado {
-  background-color: #0f172a !important;
-  border-color: #0f172a !important;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
-}
-.dia-card-mini.selecionado .dia-label {
-  color: #fbbf24 !important;
-}
-.dia-card-mini.selecionado .dia-num {
-  color: #ffffff !important;
-}
-.dia-card-mini.selecionado .dia-mes {
-  color: #94a3b8 !important;
-}
 
-.horarios-turnos-card {
-  border-color: var(--vz-border-color, #e2e8f0) !important;
-  background-color: var(--vz-card-bg, #ffffff);
-}
 .slot-ocupado-dot {
   position: absolute;
   top: 3px;
@@ -1203,5 +1167,410 @@ export default {
   height: 6px;
   border-radius: 50%;
   background-color: #ef4444;
+}
+
+/* ========================================================= */
+/* TEMA CLARO (LIGHT MODE)                                   */
+/* ========================================================= */
+.theme-light.modal-novo-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+.theme-light .modal-header-bar {
+  background-color: #ffffff;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .modal-title-text {
+  color: #0f172a;
+}
+.theme-light .btn-modal-close {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+.theme-light .btn-modal-close:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+.theme-light .modal-form-col {
+  background-color: #ffffff;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .modal-summary-col {
+  background-color: #f8fafc;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .summary-inner-card {
+  background-color: #ffffff;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .btn-tipo-cliente-active {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+}
+.theme-light .btn-tipo-cliente-inactive {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .btn-cat-active {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+}
+.theme-light .btn-cat-inactive {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .btn-turno-active {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #0f172a !important;
+}
+.theme-light .btn-turno-inactive {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .card-barbeiro-minimal {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+.theme-light .card-barbeiro-minimal.selecionado {
+  border-color: #f59e0b !important;
+  background-color: rgba(245, 158, 11, 0.08) !important;
+}
+.theme-light .card-servico-minimal {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+.theme-light .card-servico-minimal.selecionado {
+  border-color: #f59e0b !important;
+  background-color: rgba(245, 158, 11, 0.08) !important;
+}
+.theme-light .servico-icon-mini {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.theme-light .card-servico-minimal.selecionado .servico-icon-mini {
+  background-color: #fde68a;
+  color: #92400e;
+}
+.theme-light .combobox-trigger {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+}
+.theme-light .dropdown-cliente-panel {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.2);
+}
+.theme-light .mini-calendario-card {
+  background-color: #ffffff;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .dia-card-mini {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #0f172a;
+}
+.theme-light .dia-card-mini.selecionado {
+  background-color: #0f172a !important;
+  border-color: #0f172a !important;
+}
+.theme-light .dia-card-mini.selecionado .dia-label {
+  color: #fbbf24 !important;
+}
+.theme-light .dia-card-mini.selecionado .dia-num {
+  color: #ffffff !important;
+}
+.theme-light .dia-card-mini.selecionado .dia-mes {
+  color: #94a3b8 !important;
+}
+.theme-light .horarios-turnos-card {
+  background-color: #ffffff;
+  border-color: #e2e8f0 !important;
+}
+.theme-light .btn-chip-minimal {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  color: #0f172a;
+}
+.theme-light .btn-chip-minimal.active {
+  background-color: #0f172a !important;
+  color: #fbbf24 !important;
+  border-color: #0f172a !important;
+}
+.theme-light .total-preco-text {
+  color: #0f172a;
+}
+.theme-light .btn-confirmar-modal {
+  background-color: #0f172a !important;
+  color: #fbbf24 !important;
+  border-color: #0f172a !important;
+}
+.theme-light .btn-confirmar-modal:hover {
+  background-color: #1e293b !important;
+}
+
+/* ========================================================= */
+/* TEMA ESCURO (DARK MODE PROFISSIONAL)                      */
+/* ========================================================= */
+.theme-dark.modal-novo-card {
+  background-color: #212529 !important;
+  border: 1px solid #363c44 !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7) !important;
+}
+.theme-dark .modal-header-bar {
+  background-color: #212529 !important;
+  border-color: #32383e !important;
+}
+.theme-dark .modal-title-text {
+  color: #f8fafc !important;
+}
+.theme-dark .btn-modal-close {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+  color: #cbd5e1 !important;
+}
+.theme-dark .btn-modal-close:hover {
+  background-color: #32383e !important;
+  color: #ffffff !important;
+}
+.theme-dark .modal-form-col {
+  background-color: #212529 !important;
+  border-color: #32383e !important;
+}
+.theme-dark .modal-summary-col {
+  background-color: #1a1d21 !important;
+  border-color: #32383e !important;
+}
+.theme-dark .modal-summary-footer {
+  border-color: #32383e !important;
+}
+.theme-dark .summary-inner-card {
+  background-color: #24282e !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .summary-inner-card strong,
+.theme-dark .summary-inner-card .text-body {
+  color: #f8fafc !important;
+}
+.theme-dark .horario-termino-badge {
+  background-color: #2e343d !important;
+  border-color: #3d454f !important;
+  color: #cbd5e1 !important;
+}
+.theme-dark .btn-tipo-cliente-active {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+  border-color: #f59e0b !important;
+  font-weight: 700 !important;
+}
+.theme-dark .btn-tipo-cliente-inactive {
+  background-color: #282d33 !important;
+  color: #cbd5e1 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .btn-cat-active {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+  border-color: #f59e0b !important;
+  font-weight: 700 !important;
+}
+.theme-dark .btn-cat-inactive {
+  background-color: #282d33 !important;
+  color: #cbd5e1 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .btn-turno-active {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+  border-color: #f59e0b !important;
+  font-weight: 700 !important;
+}
+.theme-dark .btn-turno-inactive {
+  background-color: #282d33 !important;
+  color: #cbd5e1 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .card-barbeiro-minimal {
+  background-color: #262b30 !important;
+  border-color: #363c44 !important;
+  color: #e2e8f0 !important;
+}
+.theme-dark .card-barbeiro-minimal:hover {
+  background-color: #2d333a !important;
+  border-color: #4b5563 !important;
+}
+.theme-dark .card-barbeiro-minimal.selecionado {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  border-color: #f59e0b !important;
+}
+.theme-dark .nav-btn-barbeiro {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+  color: #cbd5e1 !important;
+}
+.theme-dark .card-servico-minimal {
+  background-color: #262b30 !important;
+  border-color: #363c44 !important;
+  color: #e2e8f0 !important;
+}
+.theme-dark .card-servico-minimal .text-body {
+  color: #f8fafc !important;
+}
+.theme-dark .card-servico-minimal:hover {
+  background-color: #2d333a !important;
+  border-color: #4b5563 !important;
+}
+.theme-dark .card-servico-minimal.selecionado {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  border-color: #f59e0b !important;
+}
+.theme-dark .servico-icon-mini {
+  background-color: #32383e !important;
+  color: #cbd5e1 !important;
+}
+.theme-dark .card-servico-minimal.selecionado .servico-icon-mini {
+  background-color: rgba(245, 158, 11, 0.25) !important;
+  color: #fbbf24 !important;
+}
+.theme-dark .combobox-trigger {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .combobox-trigger .text-body {
+  color: #f8fafc !important;
+}
+.theme-dark .combobox-trigger .btn-outline-secondary {
+  border-color: #4b5563 !important;
+  color: #cbd5e1 !important;
+  background-color: #32383e !important;
+}
+.theme-dark .dropdown-cliente-panel {
+  background-color: #24282d !important;
+  border-color: #363c44 !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7) !important;
+}
+.theme-dark .dropdown-cliente-panel .form-control {
+  background-color: #1a1d21 !important;
+  border-color: #363c44 !important;
+  color: #f8fafc !important;
+}
+.theme-dark .item-cliente-dropdown:hover {
+  background-color: #2f353d !important;
+}
+.theme-dark .item-cliente-dropdown.selecionado-item {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  border-color: #f59e0b !important;
+}
+.theme-dark .mini-calendario-card {
+  background-color: #262b30 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .mini-calendario-card .border-bottom {
+  border-color: #363c44 !important;
+}
+.theme-dark .mini-calendario-card .btn-light {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+  color: #cbd5e1 !important;
+}
+.theme-dark .btn-outline-secondary {
+  border-color: #4b5563 !important;
+  color: #cbd5e1 !important;
+  background-color: #282d33 !important;
+}
+.theme-dark .dia-card-mini {
+  background-color: #212529 !important;
+  border-color: #363c44 !important;
+  color: #f8fafc !important;
+}
+.theme-dark .dia-card-mini:hover {
+  background-color: #2c3238 !important;
+  border-color: #f59e0b !important;
+}
+.theme-dark .dia-card-mini.selecionado {
+  background-color: #f59e0b !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+}
+.theme-dark .dia-card-mini.selecionado .dia-label {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+.theme-dark .dia-card-mini.selecionado .dia-num {
+  color: #0f172a !important;
+  font-weight: 900 !important;
+}
+.theme-dark .dia-card-mini.selecionado .dia-mes {
+  color: #451a03 !important;
+  font-weight: 700 !important;
+}
+.theme-dark .horarios-turnos-card {
+  background-color: #262b30 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .horarios-turnos-card .border-bottom {
+  border-color: #363c44 !important;
+}
+.theme-dark .btn-chip-minimal {
+  background-color: #212529 !important;
+  border-color: #363c44 !important;
+  color: #f1f5f9 !important;
+}
+.theme-dark .btn-chip-minimal:hover {
+  background-color: #2d333a !important;
+  border-color: #f59e0b !important;
+  color: #fbbf24 !important;
+}
+.theme-dark .btn-chip-minimal.active {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+  border-color: #f59e0b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35) !important;
+}
+.theme-dark .btn-chip-minimal.ocupado {
+  background-color: #1a1d21 !important;
+  border-color: #2a2f35 !important;
+  color: #555b63 !important;
+  opacity: 0.45;
+}
+.theme-dark .servicos-scroll-wrapper {
+  background-color: #212529 !important;
+  border-color: #363c44 !important;
+}
+.theme-dark .form-control {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+  color: #f8fafc !important;
+}
+.theme-dark .input-group-text {
+  background-color: #282d33 !important;
+  border-color: #363c44 !important;
+  color: #94a3b8 !important;
+}
+.theme-dark .total-preco-text {
+  color: #f59e0b !important;
+}
+.theme-dark .btn-confirmar-modal {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+  border-color: #f59e0b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3) !important;
+}
+.theme-dark .btn-confirmar-modal:hover {
+  background-color: #d97706 !important;
+  border-color: #d97706 !important;
+}
+.theme-dark .border-bottom,
+.theme-dark .border-top,
+.theme-dark .border-end {
+  border-color: #32383e !important;
 }
 </style>

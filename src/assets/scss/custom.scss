@@ -878,9 +878,63 @@ html:not([data-bs-theme="dark"]) .apexcharts-datalabels-group text.apexcharts-da
         border: 1px solid #363c44 !important;
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7) !important;
 
-        .modal-detalhes-header {
+        .modal-detalhes-header,
+        .modal-header-bar {
             background-color: #212529 !important;
             border-color: #32383e !important;
+            color: #f8fafc !important;
+        }
+
+        .modal-form-col {
+            background-color: #212529 !important;
+            border-color: #32383e !important;
+        }
+
+        .modal-summary-col {
+            background-color: #1a1d21 !important;
+            border-color: #32383e !important;
+        }
+
+        .summary-inner-card {
+            background-color: #24282e !important;
+            border-color: #363c44 !important;
+            color: #f8fafc !important;
+            strong {
+                color: #f8fafc !important;
+            }
+        }
+
+        .combobox-trigger {
+            background-color: #282d33 !important;
+            border-color: #363c44 !important;
+            color: #f8fafc !important;
+        }
+
+        .dropdown-cliente-panel {
+            background-color: #24282d !important;
+            border-color: #363c44 !important;
+        }
+
+        .mini-calendario-card,
+        .horarios-turnos-card,
+        .servicos-scroll-wrapper {
+            background-color: #262b30 !important;
+            border-color: #363c44 !important;
+        }
+
+        .dia-card-mini {
+            background-color: #212529 !important;
+            border-color: #363c44 !important;
+            color: #f8fafc !important;
+
+            &.selecionado {
+                background-color: #f59e0b !important;
+                border-color: #f59e0b !important;
+                color: #0f172a !important;
+                .dia-label, .dia-num, .dia-mes {
+                    color: #0f172a !important;
+                }
+            }
         }
 
         .info-strip-card,
