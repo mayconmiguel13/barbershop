@@ -1,0 +1,951 @@
+/*
+Template Name: Velzon - Admin & Dashboard Template
+Author: Themesbrand
+Website: https://themesbrand.com/
+Contact: support@themesbrand.com
+File: Custom Css File
+*/
+
+.flatpickr-calendar {
+    background-color: var(--#{$prefix}secondary-bg) !important;
+    box-shadow: 1px 0 0 var(--#{$prefix}border-color),
+    -1px 0 0 var(--#{$prefix}border-color),
+    0 1px 0 var(--#{$prefix}border-color),
+    0 -1px 0 var(--#{$prefix}border-color),
+    0 3px 13px rgba(0, 0, 0, 0.08) !important;
+
+    &.hasTime .flatpickr-time {
+        height: 40px;
+        border-top: 1px solid var(--#{$prefix}border-color) !important;
+    }
+}
+
+.flatpickr-day {
+    color: var(--vz-body-color) !important;
+
+    &.today {
+        border-color: $primary !important;
+        background-color: rgba($primary, 0.1) !important;
+        box-shadow: $element-shadow;
+
+        &:hover,
+        &:focus {
+            border-color: $primary !important;
+            background-color: rgba($primary, 0.15) !important;
+            color: var(--#{$variable-prefix}dark) !important;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        background-color: rgba(var(--#{$variable-prefix}light-rgb), 0.7) !important;
+    }
+
+    &.inRange,
+    &.prevMonthDay.inRange,
+    &.nextMonthDay.inRange,
+    &.today.inRange,
+    &.prevMonthDay.today.inRange,
+    &.nextMonthDay.today.inRange,
+    &:hover,
+    &.prevMonthDay:hover,
+    &.nextMonthDay:hover,
+    &:focus,
+    &.prevMonthDay:focus,
+    &.nextMonthDay:focus {
+        background-color: var(--#{$variable-prefix}light) !important;
+        border-color: var(--#{$variable-prefix}light) !important;
+    }
+}
+
+.flatpickr-time {
+    input {
+        color: var(--#{$variable-prefix}body-color) !important;
+    }
+
+    .flatpickr-time-separator,
+    .flatpickr-am-pm {
+        color: var(--#{$variable-prefix}body-color) !important;
+    }
+
+    input,
+    .flatpickr-am-pm {
+
+        &:hover,
+        &:focus {
+            background: rgba($primary, 0.04) !important;
+        }
+    }
+}
+
+.flatpickr-months {
+
+    .flatpickr-prev-month,
+    .flatpickr-next-month {
+        color: rgba($white, 0.9) !important;
+        fill: rgba($white, 0.9) !important;
+
+        &:hover {
+            color: #959ea9 !important;
+
+            svg {
+                fill: rgba($white, 0.9) !important;
+            }
+        }
+
+        svg {
+            width: 14px;
+            height: 14px;
+
+            path {
+                transition: fill 0.1s;
+                fill: inherit;
+            }
+        }
+    }
+}
+
+.flatpickr-current-month {
+    .flatpickr-monthDropdown-months {
+        font-size: $font-size-base !important;
+    }
+
+    input {
+        &.cur-year {
+            font-size: $font-size-base !important;
+            font-weight: $font-weight-semibold !important;
+        }
+    }
+}
+
+// multiselect-option is-pointed
+.multiselect {
+    border-color: var(--#{$prefix}border-color) !important;
+    background: $input-bg !important;
+
+    .multiselect-option {
+        &.is-disabled {
+            background-color: var(--#{$prefix}tertiary-bg);
+            color: var(--#{$prefix}tertiary-color);
+        }
+    }
+}
+
+.multiselect-search {
+    color: $input-color !important;
+    background: $input-bg !important;
+}
+
+.dropzone {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 16px;
+    border: 2px dashed var(--#{$prefix}border-color);
+    background-color: $white;
+    transition: 0.3s ease all;
+
+    label {
+        padding: 8px 12px;
+        // color: $white;
+        // background-color: $success;
+        transition: 0.3s ease all;
+    }
+
+    input {
+        display: none;
+    }
+}
+
+.active-dropzone {
+    color: $white;
+    border-color: $white;
+    background-color: $success;
+
+    label {
+        background-color: $white;
+        color: $success;
+    }
+}
+
+.multiselect-tags .multiselect-tags-search-wrapper .multiselect-tags-search {
+    background-color: transparent;
+    color: var(--vz-input-color);
+    border: 1px solid transparent !important;
+
+    &:focus,
+    &:hover {
+        outline: var(--#{$prefix}border-color);
+    }
+}
+
+.multiselect-dropdown {
+    .multiselect-options {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .multiselect-no-results {
+        text-align: center;
+        padding-bottom: 1px;
+    }
+
+    &.is-hidden {
+        display: none !important;
+    }
+}
+
+.flatpickr-day.inRange {
+    box-shadow: none !important;
+}
+
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
+    background-color: var(--vz-light) !important;
+}
+
+.flatpickr-calendar {
+    .flatpickr-current-month {
+
+        .flatpickr-monthDropdown-months,
+        input.cur-year {
+            color: $white !important;
+            font-weight: 600;
+        }
+    }
+
+    .flatpickr-rContainer {
+        .flatpickr-weekdays {
+            height: 36px;
+            background-color: $primary;
+
+            span {
+                &.flatpickr-weekday {
+                    color: $white;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .flatpickr-day.selected,
+    .flatpickr-day.startRange,
+    .flatpickr-day.endRange,
+    .flatpickr-day.selected.inRange,
+    .flatpickr-day.startRange.inRange,
+    .flatpickr-day.endRange.inRange,
+    .flatpickr-day.selected:focus,
+    .flatpickr-day.startRange:focus,
+    .flatpickr-day.endRange:focus,
+    .flatpickr-day.selected:hover,
+    .flatpickr-day.startRange:hover,
+    .flatpickr-day.endRange:hover,
+    .flatpickr-day.selected.prevMonthDay,
+    .flatpickr-day.startRange.prevMonthDay,
+    .flatpickr-day.endRange.prevMonthDay,
+    .flatpickr-day.selected.nextMonthDay,
+    .flatpickr-day.startRange.nextMonthDay,
+    .flatpickr-day.endRange.nextMonthDay {
+        background-color: $primary !important;
+        color: $white !important;
+        border-color: $primary !important;
+    }
+}
+
+.slider-target {
+    .slider-base {
+        background-color: var(--vz-light) !important;
+    }
+}
+
+// switches
+.toggle-container {
+    box-shadow: none !important;
+}
+
+.toggle-red {
+    --toggle-bg-on: var(--vz-red);
+    --toggle-border-on: var(--vz-red);
+}
+
+.toggle-primary {
+    --toggle-bg-on: var(--vz-primary);
+    --toggle-border-on: var(--vz-primary);
+}
+
+.toggle-info {
+    --toggle-bg-on: var(--vz-info);
+    --toggle-border-on: var(--vz-info);
+}
+
+.toggle-warning {
+    --toggle-bg-on: var(--vz-warning);
+    --toggle-border-on: var(--vz-warning);
+}
+
+// projects dashboard
+.upcoming-scheduled {
+    .flatpickr-input {
+        display: none;
+    }
+
+    .flatpickr-calendar {
+        .flatpickr-monthDropdown-months {
+            color: var(--#{$prefix}secondary-color) !important;
+        }
+
+        .flatpickr-current-month input.cur-year {
+            color: var(--#{$prefix}secondary-color) !important;
+        }
+
+        .dayContainer {
+            .flatpickr-day {
+                &.today {
+                    background-color: $success !important;
+
+                    &:hover {
+                        color: $white !important;
+                    }
+                }
+            }
+        }
+
+        .flatpickr-weekdays {
+            background-color: var(--#{$variable-prefix}light) !important;
+
+            span {
+                &.flatpickr-weekday {
+                    color: var(--#{$variable-prefix}dark);
+                }
+            }
+        }
+    }
+}
+
+.upcoming-events {
+    i {
+        width: 14px;
+        height: 14px;
+        display: inline-block;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    .mdi-checkbox-blank-circle::before {
+        content: "" !important;
+    }
+}
+
+//mailbox
+.fc-media-screen {
+
+    .fc-h-event,
+    .fc-v-event {
+        border: none;
+    }
+
+    .fc-event {
+        font-size: $font-size-base;
+        padding: 5px 5px;
+    }
+
+    .fc-timegrid-event-harness-inset .fc-timegrid-event,
+    .fc-timegrid-event.fc-event-mirror,
+    .fc-timegrid-more-link {
+        box-shadow: none;
+    }
+}
+
+.fc {
+    .fc-col-header-cell {
+        padding: 8px 4px;
+    }
+
+    .fc-daygrid-day {
+        &.fc-day-today {
+            background-color: rgba($primary, 0.1) !important;
+        }
+    }
+
+    .fc-timegrid-col {
+        &.fc-day-today {
+            background-color: rgba($primary, 0.1) !important;
+        }
+    }
+
+    .fc-view-harness {
+        border-left: $table-border-width solid $table-border-color;
+        border-top: $table-border-width solid $table-border-color;
+    }
+}
+
+//ecommerce products
+
+.multiselect {
+    min-height: auto !important;
+    padding: $input-btn-padding-y $input-btn-padding-x;
+    font-size: $input-btn-font-size !important;
+
+    .multiselect-tag {
+        background: $primary;
+        border-radius: 7px;
+        padding: 2px 7px;
+        font-size: 11px;
+        font-weight: $font-weight-normal;
+    }
+
+    &.is-active {
+        box-shadow: none !important;
+    }
+}
+
+.multiselect-dropdown {
+    .multiselect-option {
+        font-size: $input-btn-font-size;
+
+        &.is-selected {
+            background-color: var(--#{$prefix}tertiary-bg) !important;
+            color:  var(--#{$prefix}tertiary-color) !important;
+
+            &.is-pointed {
+                color: var(--#{$prefix}tertiary-color) !important;
+                background-color: var(--#{$prefix}tertiary-bg) !important;
+            }
+        }
+
+        &.is-pointed {
+            background-color: var(--#{$prefix}tertiary-bg) !important;
+            color: var(--#{$prefix}tertiary-color) !important;
+        }
+    }
+}
+
+.multiselect-dropdown {
+    background-color: var(--#{$prefix}secondary-bg) !important;
+    border-color: var(--#{$prefix}border-color) !important;
+}
+
+.filter-choices-input {
+    .multiselect {
+        border: none;
+    }
+
+    .multiselect-caret,
+    .multiselect-clear-icon {
+        background-color: transparent;
+    }
+}
+
+//range slider
+.slider-base {
+    .slider-tooltip {
+        border-color: $success;
+        background: $success;
+        font-size: 11px;
+    }
+
+    .slider-handle {
+        background-color: $success;
+        border: 1px solid $white;
+        box-shadow: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .slider-connect {
+        background-color: $success;
+    }
+}
+
+//swiper slider
+.swiper-pagination {
+    .swiper-pagination-bullet {
+        width: 22px;
+        height: 5px;
+        background-color: $white;
+        border-radius: 50px;
+        box-shadow: $element-shadow;
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+    }
+
+    &.pagination-custom {
+        .swiper-pagination-bullet {
+            height: 25px;
+            width: 25px;
+            line-height: 25px;
+            border-radius: 8px;
+            background-color: $white;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+
+            &.swiper-pagination-bullet-active {
+                color: $secondary;
+                opacity: 1;
+            }
+        }
+    }
+
+    &.swiper-pagination-dark {
+        .swiper-pagination-bullet {
+            background-color: $secondary;
+        }
+
+        .dynamic-pagination {
+            .swiper-pagination-bullet {
+                background-color: $secondary;
+            }
+        }
+
+        &.pagination-custom {
+            .swiper-pagination-bullet {
+                color: $white;
+
+                &.swiper-pagination-bullet-active {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+//topbar
+.topbar-head-dropdown {
+    .nav-tabs-custom {
+        .nav-item {
+            .nav-link {
+                &.active:after {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
+
+// modal
+.v-modal-custom {
+    .modal-dialog {
+        .modal-content {
+            z-index: 1056;
+        }
+    }
+
+    .v-modal-footer {
+        padding: var(--vz-modal-padding) 0 0;
+    }
+}
+
+.modal {
+    display: block;
+
+    &.fadeInRight,
+    &.zoomIn,
+    &.flip {
+        &.show {
+            .modal-dialog {
+                z-index: 1051;
+            }
+        }
+    }
+}
+
+.modal-dialog:not(.modal-dialog-scrollable) .modal-footer {
+    &.v-modal-footer {
+        padding: var(--vz-modal-padding) 0 0;
+    }
+}
+
+//
+
+.icon-primary {
+    svg {
+        stroke: $primary;
+    }
+
+    path {
+        fill: $primary;
+        stroke: $primary;
+    }
+}
+
+.btn-content {
+    display: inline-block;
+}
+
+.arrow-none::after {
+    display: none;
+}
+
+.multiselect {
+    padding: 0;
+}
+
+.multiselect-wrapper {
+    min-height: 37.5px !important;
+}
+
+// credit-card wizard
+
+.credit-card {
+    border-radius: 10px !important;
+
+    i {
+        color: #d9d9d9;
+        padding: 8px 5px 5px 5px;
+        border-radius: 15px;
+        transform: rotate(180deg);
+    }
+
+    .card-number {
+        font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
+        font-size: 24px !important;
+        clear: both;
+        margin-bottom: -8px;
+        opacity: 0.5;
+    }
+
+    #card-holder-elem {
+        opacity: 0.5;
+    }
+
+    .ex-date {
+        text-align: right;
+        margin-right: 0;
+        opacity: 0.5;
+    }
+}
+
+.b-overlay {
+    div.bg-dark {
+        opacity: 0.55 !important;
+    }
+}
+
+// ApexCharts Donut Labels: garantir contraste correto em light e dark mode
+.apexcharts-datalabels-group text.apexcharts-datalabel-label {
+    fill: #878a99 !important;
+}
+[data-bs-theme="light"] .apexcharts-datalabels-group text.apexcharts-datalabel-value,
+html:not([data-bs-theme="dark"]) .apexcharts-datalabels-group text.apexcharts-datalabel-value {
+    fill: #212529 !important;
+}
+
+
+[data-bs-theme="dark"] {
+    .fc {
+        .fc-multimonth-daygrid {
+            background: #212529 !important;
+            border: none;
+        }
+
+        .fc-day-disabled {
+            background: #282B2E !important;
+        }
+
+        .fc-multimonth {
+            border-color: #32383E !important;
+        }
+    }
+
+    // =================================================================
+    // TEMA DARK PROFISSIONAL - MÓDULO BARBEARIA (BARBERFLOW PRO)
+    // =================================================================
+
+    // 1. Correção Universal para classes de texto que ficavam pretas no fundo escuro
+    .text-dark:not(.btn-warning):not(.btn-warning *):not(.bg-warning):not(.bg-warning *):not(.badge-warning):not(.badge.bg-warning) {
+        color: #e9ecef !important;
+    }
+
+    // 2. Corrigir cartões e contêineres brancos forçados
+    .bg-white:not(.btn-white) {
+        background-color: var(--vz-card-bg, #212529) !important;
+        border-color: #32383e !important;
+    }
+
+    .bg-light:not(.btn-light) {
+        background-color: #1a1d21 !important;
+    }
+
+    .bg-light-subtle {
+        background-color: #212529 !important;
+    }
+
+    // Cards e Gráficos do Dashboard da Barbearia
+    .dash-metric-card,
+    .dash-station-card,
+    .dash-section-card {
+        background-color: #212529 !important;
+        border-color: #32383e !important;
+    }
+
+    .dash-station-info,
+    .dash-leaderboard-item {
+        background-color: #282d33 !important;
+        border-color: #363c44 !important;
+    }
+
+    .apexcharts-datalabels-group text.apexcharts-datalabel-value {
+        fill: #f3f6f9 !important;
+    }
+    .apexcharts-pie-series path {
+        stroke: #212529 !important;
+    }
+
+    // 3. Tabela de Agendamentos & Hover de Linhas
+    .table {
+        --bs-table-color: #ced4da;
+        --bs-table-hover-color: #ffffff;
+        --bs-table-border-color: #2e343a;
+    }
+
+    .table-light {
+        --bs-table-bg: #212529 !important;
+        --bs-table-color: #94a3b8 !important;
+        border-color: #32383e !important;
+    }
+
+    .table thead th {
+        background-color: #24292e !important;
+        color: #a0aec0 !important;
+        border-bottom: 1px solid #363c44 !important;
+        font-weight: 600;
+    }
+
+    // Eliminar o efeito flashbang branco ao passar o mouse nas linhas
+    .row-agendamento:hover,
+    .table-hover > tbody > tr:hover,
+    .table-hover > tbody > tr:hover > * {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: #ffffff !important;
+    }
+
+    // Badges de serviços na tabela
+    .badge.bg-light.text-dark {
+        background-color: #2d3339 !important;
+        color: #cbd5e1 !important;
+        border-color: #3d454f !important;
+    }
+
+    // 4. Cards de Métricas / Resumo no Dark Mode
+    .card-resumo-primary,
+    .card.bg-primary-subtle {
+        background: linear-gradient(135deg, rgba(64, 81, 137, 0.28) 0%, rgba(33, 37, 41, 0.95) 100%) !important;
+        border: 1px solid rgba(64, 81, 137, 0.4) !important;
+        .text-muted {
+            color: #b0b8c4 !important;
+        }
+    }
+    .card-resumo-success,
+    .card.bg-success-subtle {
+        background: linear-gradient(135deg, rgba(10, 179, 156, 0.25) 0%, rgba(33, 37, 41, 0.95) 100%) !important;
+        border: 1px solid rgba(10, 179, 156, 0.4) !important;
+        .text-muted {
+            color: #b0b8c4 !important;
+        }
+    }
+    .card-resumo-warning,
+    .card.bg-warning-subtle {
+        background: linear-gradient(135deg, rgba(247, 184, 75, 0.25) 0%, rgba(33, 37, 41, 0.95) 100%) !important;
+        border: 1px solid rgba(247, 184, 75, 0.4) !important;
+        .text-muted {
+            color: #b0b8c4 !important;
+        }
+    }
+    .card-resumo-info,
+    .card.bg-info-subtle {
+        background: linear-gradient(135deg, rgba(41, 156, 219, 0.25) 0%, rgba(33, 37, 41, 0.95) 100%) !important;
+        border: 1px solid rgba(41, 156, 219, 0.4) !important;
+        .text-muted {
+            color: #b0b8c4 !important;
+        }
+    }
+
+    // 5. Botões Soft e Controles
+    .btn-soft-secondary {
+        background-color: #2a3036;
+        color: #cbd5e1;
+        border-color: transparent;
+        &:hover {
+            background-color: #353d45;
+            color: #ffffff;
+        }
+    }
+
+    .btn-light {
+        background-color: #2a3036 !important;
+        color: #cbd5e1 !important;
+        border-color: #363c44 !important;
+        &:hover {
+            background-color: #353d45 !important;
+            color: #ffffff !important;
+        }
+    }
+
+    // 6. Inputs e Barra Superior de Filtros
+    .form-control,
+    .form-select {
+        background-color: #212529;
+        border-color: #32383e;
+        color: #ced4da;
+        &:focus {
+            background-color: #262a2f;
+            border-color: #f7b84b;
+            color: #ffffff;
+        }
+    }
+
+    .input-group-text {
+        background-color: #262a2f !important;
+        border-color: #32383e !important;
+        color: #878a99;
+    }
+
+    // 7. Mini Calendário Pop-up
+    .mini-calendario-popup {
+        background-color: #212529 !important;
+        border: 1px solid #363c44 !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+
+        .bg-white {
+            background-color: #212529 !important;
+        }
+
+        .bg-light-subtle {
+            background-color: #262a2f !important;
+            border-color: #32383e !important;
+        }
+
+        .btn-dia-celula {
+            color: #cbd5e1 !important;
+            &:hover {
+                background-color: rgba(245, 158, 11, 0.2) !important;
+                color: #fbbf24 !important;
+            }
+            &.dia-selecionado {
+                background-color: #f59e0b !important;
+                color: #0f172a !important;
+                border-color: #f59e0b !important;
+            }
+            &.dia-hoje {
+                border-color: #f59e0b !important;
+                color: #fbbf24 !important;
+            }
+            &.outro-mes {
+                color: #4b5563 !important;
+            }
+            &.dia-passado {
+                color: #64748b !important;
+            }
+        }
+
+        .nav-btn {
+            background-color: #262a2f !important;
+            border-color: #363c44 !important;
+            color: #cbd5e1 !important;
+        }
+
+        .btn-modal-close {
+            background-color: #262a2f !important;
+            border-color: #363c44 !important;
+            color: #94a3b8 !important;
+            &:hover {
+                background-color: #32383e !important;
+                color: #ffffff !important;
+            }
+        }
+    }
+
+    // 8. Modais de Detalhes e Criação
+    .modal-detalhes-card,
+    .modal-novo-card {
+        background-color: #212529 !important;
+        border: 1px solid #363c44 !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7) !important;
+
+        .modal-detalhes-header {
+            background-color: #212529 !important;
+            border-color: #32383e !important;
+        }
+
+        .info-strip-card,
+        .financeiro-summary-card,
+        .servicos-receipt-card,
+        .observacoes-card {
+            background-color: #262b30 !important;
+            border-color: #363c44 !important;
+        }
+
+        .card-barbeiro-minimal,
+        .card-servico-minimal {
+            background-color: #262b30 !important;
+            border-color: #363c44 !important;
+            color: #e2e8f0 !important;
+
+            &:hover {
+                background-color: #2d333a !important;
+                border-color: #4b5563 !important;
+            }
+
+            &.selecionado {
+                background-color: rgba(245, 158, 11, 0.15) !important;
+                border-color: #f59e0b !important;
+            }
+        }
+
+        .servico-icon-mini {
+            background-color: #32383e !important;
+            color: #cbd5e1 !important;
+        }
+
+        .btn-modal-close {
+            background-color: #262a2f !important;
+            border-color: #363c44 !important;
+            color: #94a3b8 !important;
+            &:hover {
+                background-color: #32383e !important;
+                color: #ffffff !important;
+            }
+        }
+    }
+
+    // 9. Paginação e Rodapés
+    .pagination .page-link {
+        background-color: #262a2f;
+        border-color: #32383e;
+        color: #ced4da;
+        &:hover {
+            background-color: #32383e;
+            color: #ffffff;
+        }
+    }
+    .pagination .page-item.active .page-link {
+        background-color: #f59e0b;
+        border-color: #f59e0b;
+        color: #0f172a;
+        font-weight: 700;
+    }
+    .pagination .page-item.disabled .page-link {
+        background-color: #1a1d21;
+        border-color: #2d3238;
+        color: #555b63;
+    }
+}
+
+
+
