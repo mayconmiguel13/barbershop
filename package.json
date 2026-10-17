@@ -68,12 +68,14 @@
   "devDependencies": {
     "@achrinza/node-ipc": "^10.1.10",
     "@babel/eslint-parser": "^7.24.1",
+    "@babel/preset-typescript": "^7.29.7",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.2.45",
     "eslint": "^8.31.0",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "typescript": "^7.0.2"
   },
   "resolutions": {
     "autoprefixer": "10.4.5"
@@ -87,6 +89,15 @@
       "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser",
+      "requireConfigFile": false,
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-typescript"
+        ]
+      }
+    },
     "rules": {}
   },
   "browserslist": [
