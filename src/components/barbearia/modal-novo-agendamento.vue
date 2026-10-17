@@ -383,23 +383,23 @@
                   class="col-md-6"
                 >
                   <div
-                    class="card-servico-item p-2 rounded-3 border cursor-pointer d-flex align-items-center justify-content-between"
+                    class="card-servico-item p-2 rounded-3 border cursor-pointer d-flex align-items-center justify-content-between gap-2"
                     :class="{ 'card-servico-selecionado': servicosSelecionadosIds.includes(s.id) }"
                     @click="alternarServico(s.id)"
                   >
-                    <div class="d-flex align-items-center gap-2 overflow-hidden">
-                      <div class="servico-icon-tag">
+                    <div class="d-flex align-items-center gap-2 min-w-0 flex-1 me-1">
+                      <div class="servico-icon-tag shrink-0 flex-shrink-0">
                         <i :class="s.icone || 'ri-scissors-2-line'"></i>
                       </div>
-                      <div class="text-truncate">
-                        <h6 class="fs-12 fw-semibold text-slate-100 mb-0 text-truncate">{{ s.nome }}</h6>
-                        <span class="fs-11 text-muted">{{ s.duracaoMin }} min</span>
+                      <div class="min-w-0 flex-1">
+                        <h6 class="fs-12 fw-semibold text-slate-100 mb-0 text-truncate d-block" :title="s.nome">{{ s.nome }}</h6>
+                        <span class="fs-11 text-muted d-block">{{ s.duracaoMin }}&nbsp;min</span>
                       </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 flex-shrink-0">
-                      <span class="servico-preco-tag">R$ {{ formatarMoeda(s.preco) }}</span>
+                    <div class="d-flex align-items-center gap-2 shrink-0 flex-shrink-0">
+                      <span class="servico-preco-tag whitespace-nowrap shrink-0 text-nowrap">R$&nbsp;{{ formatarMoeda(s.preco) }}</span>
                       <div
-                        class="checkbox-custom"
+                        class="checkbox-custom shrink-0 flex-shrink-0"
                         :class="{ 'checked': servicosSelecionadosIds.includes(s.id) }"
                       >
                         <i v-if="servicosSelecionadosIds.includes(s.id)" class="ri-check-line"></i>
@@ -714,17 +714,18 @@
 
             <!-- Card: Horário & Previsão Término -->
             <div class="summary-box p-3 rounded-3 border mb-3">
-              <span class="fs-10 text-muted text-uppercase fw-bold d-block mb-1">Data & Previsão</span>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <strong class="fs-12 text-slate-100 d-block">
-                    {{ formatarDataCurta(form.data) }} às {{ form.horario || '--:--' }}
-                  </strong>
-                  <span class="fs-11 text-muted">Duração total estimada: {{ duracaoTotalMin }} min</span>
-                </div>
-                <span class="badge bg-slate-800 text-slate-200 border border-slate-700 fs-11 py-1 px-2 rounded-pill">
+              <div class="d-flex align-items-center justify-content-between mb-1.5">
+                <span class="fs-10 text-muted text-uppercase fw-bold">Data & Previsão</span>
+                <span class="badge bg-slate-800 text-slate-200 border border-slate-700 fs-11 py-0.5 px-2 rounded-pill whitespace-nowrap shrink-0 text-nowrap">
                   Término: {{ calcularHorarioTermino(form.horario, duracaoTotalMin) }}
                 </span>
+              </div>
+              <strong class="fs-13 text-slate-100 d-block mb-1">
+                {{ formatarDataCurta(form.data) }} às {{ form.horario || '--:--' }}
+              </strong>
+              <div class="d-flex align-items-center gap-1.5 text-muted fs-11 whitespace-nowrap text-nowrap">
+                <i class="ri-timer-line text-amber-500"></i>
+                <span>Duração total estimada: <strong class="text-slate-300 fw-semibold">{{ duracaoTotalMin }}&nbsp;min</strong></span>
               </div>
             </div>
 
@@ -748,12 +749,12 @@
                     <span class="fs-12 text-slate-200 fw-medium">{{ s.nome }}</span>
                     <small class="text-muted d-block fs-10">{{ s.duracaoMin }} min</small>
                   </div>
-                  <div class="d-flex align-items-center gap-2">
-                    <strong class="fs-12 text-slate-100">R$ {{ formatarMoeda(s.preco) }}</strong>
+                  <div class="d-flex align-items-center gap-2 whitespace-nowrap shrink-0 flex-shrink-0">
+                    <strong class="fs-12 text-slate-100 whitespace-nowrap shrink-0 text-nowrap">R$&nbsp;{{ formatarMoeda(s.preco) }}</strong>
                     <button
                       type="button"
                       @click="alternarServico(s.id)"
-                      class="btn-icon-xs text-muted"
+                      class="btn-icon-xs text-muted shrink-0"
                       title="Remover"
                     >
                       <i class="ri-close-line fs-14"></i>
@@ -795,9 +796,9 @@
                 <span class="fs-10 text-muted fw-bold text-uppercase d-block">Total do Agendamento</span>
                 <span class="fs-11 text-slate-400">⏱️ {{ duracaoTotalMin }} min de atendimento</span>
               </div>
-              <div class="text-end">
-                <h3 class="preco-total-destaque fw-bold mb-0 text-amber-500">
-                  R$ {{ formatarMoeda(valorTotalCalculado) }}
+              <div class="text-end whitespace-nowrap shrink-0 flex-shrink-0">
+                <h3 class="preco-total-destaque fw-bold mb-0 text-amber-500 whitespace-nowrap shrink-0 text-nowrap">
+                  R$&nbsp;{{ formatarMoeda(valorTotalCalculado) }}
                 </h3>
               </div>
             </div>
@@ -1926,19 +1927,21 @@ onBeforeUnmount(() => {
   border-color: #475569 !important;
 }
 .card-dia-selecionado {
-  background-color: #f59e0b !important;
   border-color: #f59e0b !important;
-  color: #0f172a !important;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2) !important;
 }
-.card-dia-selecionado .dia-label,
+.card-dia-selecionado .dia-label {
+  color: #f59e0b !important;
+  font-weight: 800 !important;
+}
 .card-dia-selecionado .dia-num {
-  color: #0f172a !important;
+  color: #fbbf24 !important;
   font-weight: 900 !important;
 }
 .card-dia-selecionado .dia-mes {
-  color: #451a03 !important;
-  font-weight: 700 !important;
+  color: #f59e0b !important;
+  font-weight: 600 !important;
 }
 
 /* Botões de Turnos */
@@ -2156,25 +2159,64 @@ onBeforeUnmount(() => {
   max-width: 200px;
 }
 
-/* Scrollbars Internas */
+/* Utility classes para Whitespace, Truncate e Flex */
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+.shrink-0 {
+  flex-shrink: 0 !important;
+}
+.min-w-0 {
+  min-width: 0 !important;
+}
+.flex-1 {
+  flex: 1 1 0% !important;
+}
+
+/* Scrollbars Internas Customizadas (Dark Mode / Slate) */
+.modal-left-scroll,
+.servicos-scroll-box,
+.lista-clientes-scroll,
+.summary-content {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+
 .modal-left-scroll {
   height: 100%;
   max-height: calc(88vh - 72px);
   overflow-y: auto;
-  scrollbar-width: thin;
 }
+
 .modal-left-scroll::-webkit-scrollbar,
 .servicos-scroll-box::-webkit-scrollbar,
 .lista-clientes-scroll::-webkit-scrollbar,
 .summary-content::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
+
+.modal-left-scroll::-webkit-scrollbar-track,
+.servicos-scroll-box::-webkit-scrollbar-track,
+.lista-clientes-scroll::-webkit-scrollbar-track,
+.summary-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .modal-left-scroll::-webkit-scrollbar-thumb,
 .servicos-scroll-box::-webkit-scrollbar-thumb,
 .lista-clientes-scroll::-webkit-scrollbar-thumb,
 .summary-content::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.25);
-  border-radius: 4px;
+  background-color: #334155;
+  border-radius: 9999px;
+  transition: background-color 0.15s ease;
+}
+
+.modal-left-scroll::-webkit-scrollbar-thumb:hover,
+.servicos-scroll-box::-webkit-scrollbar-thumb:hover,
+.lista-clientes-scroll::-webkit-scrollbar-thumb:hover,
+.summary-content::-webkit-scrollbar-thumb:hover {
+  background-color: #475569;
 }
 
 /* ==========================================================================
